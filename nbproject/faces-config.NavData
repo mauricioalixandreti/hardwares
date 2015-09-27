@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="adm/empresa/List.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="adm/empresa/Edit.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="template.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="adm/usuario/Create.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="adm/servico/servico/Create.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="adm/usuario/servico-cadastro.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="adm/empresa/relatorio.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="adm/usuario/detalharServico.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="teste.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="adm/usuario/Edit.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="adm/servico/servico/View.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="adm/empresa/manageatendente.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="adm/usuario/servicosFinalizados.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="adm/empresa/deativarAtendente.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="index.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="adm/usuario/View.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="adm/usuario/home.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="adm/servico/servico/List.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="adm/empresa/View.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="adm/usuario/List.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="adm/servico/servico/Edit.xhtml" x="150" y="750" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

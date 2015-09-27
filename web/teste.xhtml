@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/cssLayout.css"/>
+        <h:outputStylesheet name="css/default.css"/>
+        <!--        <h:outputStylesheet name="css/jsfcrud.css.css"/>-->
+        <h:outputScript name="js/hardware" />
+
+        <title>CheckHardware</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+
+    <h:body>
+
+
+        <div id="top">
+            <ui:insert name="top">               
+                <div align="center">
+
+                </div>
+                <div align="right">#{usuarioController.usuarioLogado.tipoUsuario}<br/>
+                    #{usuarioController.usuarioLogado.nome} #{usuarioController.usuarioLogado.cpf}<br/>
+                    <p:commandLink style="color: gold" value="Encerrar o Sistema" onclick="dlgLogout.show()"/>
+                </div>
+                <h:form>
+                    <p:dialog widgetVar="dlgLogout" visible="false" style="width: 300px" header="Encerrar Sistema" modal="true"
+                              resizable="false">
+                        <h3>Deseja Realmente encerrar o Sistema Agora?</h3>
+                        <div align="center" ><p:graphicImage  value="/resources/images/erro.png" /></div>                    
+                        <f:facet name="footer">
+                            <div align="right">                            
+                                <p:commandButton style="background:tomato; color: white" value="NÃO" onclick="dlgLogout.show()" ajax="false"/>
+                                <p:commandButton style="background:green; color: white" value="SIM" action="#{usuarioController.logout()}" ajax="false"/>
+                            </div>
+                        </f:facet>
+                    </p:dialog>
+                </h:form>
+            </ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+                    <h:form>
+                        <p:tabMenu activeIndex="0" >
+                            <p:menuitem value="Overview" icon="ui-icon-star"/>
+                            <p:menuitem value="Demos"  icon="ui-icon-search" />
+                            <p:menuitem value="Documentation"  icon="ui-icon-document"/>
+                            <p:menuitem value="Support"  icon="ui-icon-wrench"/>
+                            <p:menuitem value="Social" icon="ui-icon-person" />
+                            <p:menuitem value="Social" icon="ui-icon ui-icon-folder-collapsed" />
+                        </p:tabMenu>
+
+                        <p:tieredMenu>
+                            <p:submenu label="Ajax Menuitems" icon="ui-icon-refresh">
+                                <p:menuitem value="Save" 
+                                             icon="ui-icon-disk" />
+                                <p:menuitem value="Update" 
+                                            icon="ui-icon-arrowrefresh-1-w" />
+                            </p:submenu>
+                            <p:submenu label="Non-Ajax Menuitem" icon="ui-icon-newwin">
+                                <p:menuitem value="Delete" 
+                                             ajax="false" icon="ui-icon-close"/>
+                            </p:submenu>
+                            <p:separator />
+                             </p:tieredMenu>
+                        
+<!--                         <p:commandButton id="btnImprimir" value="Imprimir em PDF" >
+                            <p:dataExporter  type="pdf" target="listaAtendente" fileName="listadeatendentes"/>
+                        </p:commandButton>-->
+
+                            <!--                        <p:panelMenu >
+                            
+                                                        <p:submenu label="Administração"> 
+                                                            <p:menuitem value="Administrar Atendentes" url="/adm/empresa/manageatendente.xhtml" 
+                                                                        ajax="false" icon="ui-icon-disk" />  
+                                                                                            <p:menuitem value="Remover Atendente"   icon="ui-icon-disk" />
+                                                        </p:submenu>                                
+                                                        <p:submenu label="Cliente">  
+                                                            <p:menuitem value="Cadastro" icon="ui-icon-disk" />  
+                                                            <p:menuitem value="Verificar Pagamento"   icon="ui-icon-disk" />  
+                                                            <p:menuitem value="Enviar Email"   icon="ui-icon-disk" />  
+                                                        </p:submenu>                                
+                                                        <p:submenu label="Servico"> 
+                                                            <p:menuitem value="Cadastro" icon="ui-icon-disk" />  
+                                                            <p:menuitem value="Verificar"   icon="ui-icon-disk" />  
+                                                            <p:menuitem value="Baixa"   icon="ui-icon-disk" />  
+                                                        </p:submenu>                               
+                            
+                                                        <p:submenu label="Relatórios">                                
+                                                            <p:menuitem id="r0" value="Produtos Estocados"/>  
+                                                            <p:menuitem id="r1" value="Clientes Em debito"/>                                                                 
+                                                        </p:submenu>
+                            
+                                                    </p:panelMenu>-->
+                    </h:form>
+
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

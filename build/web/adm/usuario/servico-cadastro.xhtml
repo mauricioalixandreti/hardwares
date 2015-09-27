@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./../../template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <h:form id="formCad">
+            <p:growl autoUpdate="false"/>
+            <h2>Cadastrar novo serviço</h2>
+
+            <h:panelGrid columns="2" style="margin: 60px;"> 
+
+                <h:outputLabel value="#{bundle.CreateServicoLabel_nomeServico}" for="nomeServico" />
+                <h:inputText id="nomeServico" value="#{servicoController.selected.nomeServico}" title="#{bundle.CreateServicoTitle_nomeServico}" required="true"
+                             style="width: 250px;" requiredMessage="#{bundle.CreateServicoRequiredMessage_nomeServico}"/>
+
+                <h:outputLabel value="#{bundle.CreateServicoLabel_descricao}" for="descricao" />
+                <p:inputTextarea id="descricao" value="#{servicoController.selected.descricao}" style="width: 400px; height: 100px;" maxlength="300" autoResize="false" />
+
+                <h:outputLabel value="Nome do Cliente:" for="cliente" />
+                <p:selectOneMenu id="cliente" value="#{servicoController.selected.cliente}" 
+                                 converter="clienteConverter"  
+                                 required="true" requiredMessage="O nome do cliente é obrigatório!">
+                    <f:selectItem itemLabel="Selecione..." itemValue=""/>
+                    <f:selectItems value="#{servicoController.allClientesDaEmpresaLogada}" 
+                                   var="cliente"
+                                   itemLabel="#{cliente.nomeCompleto} :::: #{cliente.emailcpf} " itemValue="#{cliente.emailcpf}"/>
+                </p:selectOneMenu>
+
+
+                <h:outputLabel value="Data de Cadastro:" for="dataEntrada" />               
+                <p:inputMask id="dataEntrada" value="#{servicoController.selected.dataEntrada}"
+                             onclick="data.show()" onmouseover="data.show()"
+                             mask="99/99/9999">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />                    
+                </p:inputMask> 
+                        
+                <h:outputLabel value="Data de Entrega::" for="dataSaida" />
+                <p:inputMask id="dataSaida" value="#{servicoController.selected.dataSaida}" mask="99/99/9999">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />                    
+                </p:inputMask> 
+                
+
+                <h:outputLabel value="#{bundle.CreateServicoLabel_pago}" for="pago" />
+                <p:selectOneMenu id="pago"  style="width: 250px; height: 20px" required="true"                               
+                                 value="#{servicoController.pagoAsString}"
+                                 requiredMessage="O serviço já foi pago?">                  
+                    <f:selectItem itemLabel="NÃO" itemValue="N" />
+                    <f:selectItem itemLabel="SIM" itemValue="Y" />                                    
+                </p:selectOneMenu>
+
+                <h:outputLabel value="#{bundle.CreateServicoLabel_valor}" for="valor" />                
+                <p:inputText id="valor" value="#{servicoController.valorAsSring}"                             
+                             style="text-align: right"
+                             onkeyup="formatarValor()"
+                             title="#{bundle.CreateServicoTitle_valor}" />
+
+
+                <f:facet name="footer">                     
+                    <div align="right">                            
+                        <p:commandButton id="btnCadServico" 
+                                         style="background: green;color: white"
+                                         action="#{servicoController.create()}"
+                                         ajax="false"
+                                         value="Cadastrar" icon="ui-icon-check"  />
+                    </div>                                    
+                </f:facet>
+            </h:panelGrid>
+            
+            <p:dialog widgetVar="dlgData" visible="false" style="width: 200px; height: 100px;" >
+                <p:calendar widgetVar=""  />
+                
+            </p:dialog>
+            
+            
+            <script type="text/javascript">
+            function formatarValor(){ 
+                
+                var pagar = $('#formCad\\:valor').val();     
+                
+                if (pagar.length >9){
+                    alert ("Valor incorreto, tente novamente!")
+                     $('#formCad\\:valor').val("");
+                }else                
+                if (pagar.length > 6){
+                    var replaced = $('#formCad\\:valor').val().replace('.','');
+                     $('#formCad\\:valor').val(replaced);
+                    valorMairo6();
+                    return false;
+                }else
+                 if ( pagar.length >= 3 ) {
+                     var replaced = $('#formCad\\:valor').val().replace(',','');
+                     $('#formCad\\:valor').val(replaced);                    
+                    
+                    var tamanho = $('#formCad\\:valor').val().length;                   
+                    
+                    var posVirgula = $('#formCad\\:valor').val().substr(-2,2);                  
+                    
+                    var antesVirgula = $('#formCad\\:valor').val().substr(0,tamanho-2);
+                    $('#formCad\\:valor').val(antesVirgula+','+posVirgula);
+                    return false;
+                 }           
+              }  
+              
+              function valorMairo6(){
+                   var replaced = $('#formCad\\:valor').val().replace(',','');                       
+                     $('#formCad\\:valor').val(replaced);               
+                    
+                    var tamanho = $('#formCad\\:valor').val().length;
+                    var antesPonto2 = $('#formCad\\:valor').val().substring(0, tamanho-5);                                        
+                    var meio= $('#formCad\\:valor').val().substr(antesPonto2.length,3 );
+                    var posVirgula2 = $('#formCad\\:valor').val().substr(-2,2);                    
+                    $('#formCad\\:valor').val(antesPonto2+'.'+meio+','+posVirgula2);
+                    return false;
+                    
+              }
+              
+        </script>
+        </h:form>
+       
+        
+                
+        
+    </ui:define>
+
+
+
+</ui:composition>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEmpresaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEmpresaLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{empresaController.selected.email}" title="#{bundle.EditEmpresaTitle_email}" required="true" requiredMessage="#{bundle.EditEmpresaRequiredMessage_email}"/>
+                    <h:outputLabel value="#{bundle.EditEmpresaLabel_nomeEmpresa}" for="nomeEmpresa" />
+                    <h:inputText id="nomeEmpresa" value="#{empresaController.selected.nomeEmpresa}" title="#{bundle.EditEmpresaTitle_nomeEmpresa}" required="true" requiredMessage="#{bundle.EditEmpresaRequiredMessage_nomeEmpresa}"/>
+                    <h:outputLabel value="#{bundle.EditEmpresaLabel_senha}" for="senha" />
+                    <h:inputText id="senha" value="#{empresaController.selected.senha}" title="#{bundle.EditEmpresaTitle_senha}" required="true" requiredMessage="#{bundle.EditEmpresaRequiredMessage_senha}"/>
+                    <h:outputLabel value="#{bundle.EditEmpresaLabel_blocked}" for="blocked" />
+                    <h:inputText id="blocked" value="#{empresaController.selected.blocked}" title="#{bundle.EditEmpresaTitle_blocked}" required="true" requiredMessage="#{bundle.EditEmpresaRequiredMessage_blocked}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{empresaController.update}" value="#{bundle.EditEmpresaSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditEmpresaViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{empresaController.prepareList}" value="#{bundle.EditEmpresaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditEmpresaIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./../../template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+
+
+
+    <ui:define name="content">
+        <div align="center">
+            <h:form>
+                <p:dataTable id="servicosAbertos" value="#{servicoController.allServicosFinalizados}" var="item"   
+                             styleClass="bodyDlg"
+                             scrollHeight="1" 
+                             style="border:solid 1px;">
+
+                    <p:column headerText="Discriminação" footerText="" >                        
+                        <h:outputText value="#{item.nomeServico}"/>
+                    </p:column>
+
+                    <p:column headerText="Status" footerText="" >                         
+                        <h:outputText value="#{item.status == 1?'PRONTO':''}"/>
+                    </p:column>
+
+                    <p:column headerText="Data de Cadastro:" footerText="" >                        
+                        <h:outputText value="#{item.dataEntrada}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Pago:" footerText="" >                       
+                        <h:outputText value="#{item.pago == 1?'SIM':'NÃO'}"/>
+                    </p:column>
+
+                    <p:column  headerText="Valor:" footerText="" >                          
+                        <h:outputText value="#{item.valor}"/>
+                    </p:column>
+                    <p:column  headerText="Data da Entrega:" footerText="" >                        
+                        <h:outputText value="#{item.dataSaida == null? 'AGUARDANDO':item.dataSaida}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column  headerText="Cliente" footerText="" >                          
+                        <h:outputText value="#{item.cliente.nomeCompleto}"/>
+                    </p:column>
+
+                    <p:column  headerText="Detalhes" footerText="" >                          
+                        <p:commandButton type="button"  icon="ui-icon ui-icon-folder-collapsed" onclick="confirmDetalhar.show()" style="background: #00ffcc"  />
+                    </p:column>
+
+                    <p:column  headerText="Cancelar" footerText="" >                          
+                        <p:commandButton type="button" icon="ui-icon-trash" onclick="cd.show()" style="background: #ff9999" />
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:growl id="growCancelar" />
+                
+<!--                dialogo de cancelamento de serviço-->
+                
+                <p:confirmDialog id="confirmCanelamento" message="Deseja Relamente Excluir este serviço?"
+                                 header="Exlusão de Serviço" severity="alert"
+                                 widgetVar="cd" visible="false" >
+                    <div align="right">
+                        <p:commandButton value="Não" style="background:tomato; color: white"  onclick="cd.hide();" type="button" />
+                        <p:commandButton value="Sim" style="background:green; color: white" update="servicosAbertos" oncomplete="cd.hide()"/>                        
+                    </div>
+                </p:confirmDialog>
+
+
+                 <p:confirmDialog id="confirmDetalhar" message=""
+                                 style="width: 400px" 
+                                 header="Detalhes do Serviço" severity="alert"
+                                 widgetVar="confirmDetalhar" visible="false" >
+                    <div align="right">                        
+                        <p:commandButton value="Fechar" style="background:green; color: white" update="servicosAbertos" oncomplete="confirmDetalhar.hide()"/>                        
+                    </div>
+                </p:confirmDialog>
+
+            </h:form>
+
+        </div>
+    </ui:define>
+
+
+
+</ui:composition>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+   
+<!--   <application>
+        <resource-bundle>
+            <base-name>/resources/propriedades/bundle.propreties</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>-->
+    
+    <converter>
+        <converter-id>cpfConverter</converter-id>
+        <converter-class>br.com.maxinfo.hardware.converter.CpfConverter</converter-class>
+    </converter>
+    
+    <converter>
+        <converter-id>clienteConverter</converter-id>
+        <converter-class>br.com.maxinfo.hardware.converter.ClienteConverter</converter-class>
+    </converter>
+    
+    <converter>
+        <converter-id>atendenteConverter</converter-id>
+        <converter-class>br.com.maxinfo.hardware.converter.AtendenteConverter</converter-class>
+    </converter>
+    
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+</faces-config>

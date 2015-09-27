@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="content">
+
+            <h:form id="formRemoverAt">
+               
+                <div align="center" style="margin-top: 20px;" >
+                     <p:growl id="grremove"/>
+                    <p:dataTable id="listaAtRemove" var="item" 
+                                 value="#{usuarioController.usuariosDaEmpresaLogada()}"
+                                 styleClass="bodyDlg"
+                                 style="width: 900px;"
+                                 scrollHeight="200"  scrollable="true">
+                        <p:column headerText="Nome" footerText="" width="400">                            
+                            <h:outputText value="#{item.nome}"/>
+                        </p:column>
+                        <p:column headerText="CPF" footerText="" width="80" >                            
+                            <h:outputText value="#{item.cpf}"/>
+                        </p:column>
+                        <p:column headerText="Usuário" footerText="" width="80">                            
+                            <h:outputText value="#{item.tipoUsuario}"/>
+                        </p:column>                         
+                        <p:column headerText="Ativo" footerText="" width="40">                            
+                            <h:outputText value="#{item.ativo == 1? 'SIM':'NÃO' }"/>
+                        </p:column>
+                        <p:column headerText="Remover" footerText="" width="70">                            
+                            <p:commandButton style="background:tomato; color: white"
+                                             action="#{usuarioController.prepareToRemoveAt(item)}"                                             
+                                             icon="ui-icon-trash" oncomplete="cd.show()" />
+                        </p:column>                   
+
+                    </p:dataTable>
+                </div>
+                 <p:confirmDialog id="confirmCanelamento" message="Deseja Relamente Excluir o Atendente?"
+                                 header="Exlusão de Atendente" severity="alert"
+                                 widgetVar="cd" visible="false" >
+                      dadsfadsfd  #{usuarioController.current.nome}
+                    <div align="right">
+                        <p:commandButton value="Não" style="background:tomato; color: white"  onclick="cd.hide();" type="button" />
+                        <p:commandButton value="Sim" style="background:green; color: white"
+                                          action="#{usuarioController.removeAtendenteSelected()}"
+                                          oncomplete="cd.hide();"
+                                          update="formRemoverAt"
+                                         />                        
+                    </div>
+                </p:confirmDialog>
+
+
+
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

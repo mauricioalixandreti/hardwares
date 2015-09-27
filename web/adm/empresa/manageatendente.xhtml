@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="content">
+
+            <h:form  id="tabAtendente">  
+                <p:growl id="grwlCadastrar" />
+                <h2>Administrar Atendentes/Usuários</h2>
+                <p:tabView id="tbView" orientation="left"  style="background-color: rgb(227, 227, 227)">
+                    <p:tab title="Cadastrar">
+                        <div align="center" style="padding-top:30px;padding-right: 200px;">
+                            <h:panelGrid columns="2" id="cadAtend" styleClass="bodyDlg"  >
+
+                                <h:outputLabel value="CPF do atendente:" for  ="cpfCad" />
+                                <p:inputMask  mask="999-999-999-99" id="cpfCad" value="#{usuarioController.cpfasString}" 
+                                              style="width: 250px"  required="true" requiredMessage="CPF Obrigatório"/>
+
+                                <h:outputLabel value="Nome do Atendente:" for="nomeCad" />
+                                <h:inputText id="nomeCad" value="#{usuarioController.selected.nome}" style="width: 250px;" />
+
+                                <h:outputLabel value="Tipo de Usuário:" for="tipoUsuarioCad" />
+                                <p:selectOneMenu id="tipoUsuarioCad"  style="width: 250px; height: 20px" required="true" 
+                                                 value="#{usuarioController.selected.tipoUsuario}"             requiredMessage="Informe o tipo de usuário!">
+                                    <f:selectItem itemLabel="Selecione..." itemValue=""/>
+                                    <f:selectItem itemLabel="ATENDENTE" itemValue="ATENDENTE" />
+                                    <f:selectItem itemLabel="ADMINISTRADOR" itemValue="ADM" />                                    
+                                </p:selectOneMenu>
+
+                                <h:outputLabel value="Senha: " for="senha" />
+                                <h:inputSecret id="senha" value="#{usuarioController.selected.senha}"
+                                               style="width: 250px"  required="true" requiredMessage="A senha é obrigatória" />
+
+                                <h:outputLabel value="Repetir a Senha: " for="senhaRetype" />
+                                <h:inputSecret id="senhaRetype" value="#{usuarioController.retypeSenha}" 
+                                               style="width: 250px" required="true" requiredMessage="A senha deve ser repetida"/>
+
+                                <f:facet name="footer">                     
+                                    <div align="right">                            
+                                        <p:commandButton id="btnAtend" action="#{usuarioController.create}"
+                                                         style="background: green;color: white" value="Salvar" icon="ui-icon-check" ajax="false" />
+                                    </div>
+                                    <h:panelGroup id="messagePanel" layout="block">                                    
+                                        <p:growl id="growInsertAtend" for="cadAtend" autoUpdate="false"></p:growl>
+                                    </h:panelGroup>
+                                </f:facet>
+                            </h:panelGrid>
+                        </div>
+                    </p:tab>                                      
+
+                    <p:tab title="Ver todos os usuários">
+                        <p:dataTable id="listaAtendentes" var="item" value="#{usuarioController.usuariosDaEmpresaLogada()}"
+                                     styleClass="bodyDlg"
+                                     sortBy="#{item.tipoUsuario}" scrollHeight="300" scrollWidth="710" scrollable="true">
+                            <p:column headerText="Nome" footerText="" width="300">                            
+                                <h:outputText value="#{item.nome}"/>
+                            </p:column>
+                            <p:column headerText="CPF" footerText="" width="100" >                            
+                                <h:outputText value="#{item.cpf}"/>
+                            </p:column>
+                            <p:column headerText="Tipo de Usuário" footerText="" width="100">                            
+                                <h:outputText value="#{item.tipoUsuario}"/>
+                            </p:column>                         
+                            <p:column headerText="Ativo" footerText="" width="80">                            
+                                <h:outputText value="#{item.ativo == 1? 'SIM':'NÃO' }"/>
+                            </p:column>                         
+
+                        </p:dataTable>                       
+
+                    </p:tab>
+                </p:tabView>
+
+
+                <script type="text/javascript">
+                    function mostrarRemoveAtendente(){
+                        $('#tabAtendente\\:mostarAtendente').style('display','block');                        
+                    }
+                </script>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
