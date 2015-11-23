@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/template.xhtml">        
+        <ui:define name="content">            
+            <h:form id="formImpressao">
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="Ordem de Serviço"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.codigo}"/>
+                    
+                    <h:outputText value="Discriminação"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.nomeServico}" />
+                    
+                    <h:outputText value="Observação"/>
+                    <h:outputText value="#{usuarioController.selected.ativo}" title="#{bundle.ViewUsuarioTitle_ativo}"/>
+                    
+                    <h:outputText value="Descrição"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.descricao}" title="#{bundle.ViewUsuarioTitle_senha}"/>
+                    
+                    <h:outputText value="Nome do Cliente"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.cliente.nomeCompleto}" title="#{bundle.ViewUsuarioTitle_nome}"/>
+                    
+                    <h:outputText value="Data de Cadastro"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.dataEntrada}"/>
+                    
+                    <h:outputText value="Previsão de entrega"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.dataSaida}"/>
+                    
+                    <h:outputText value="Valor Pago"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.valor}"/>
+                </h:panelGrid>
+            
+                <br/>
+                <br/>
+                <br/>
+                
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="Ordem de Serviço"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.codigo}"/>
+                    
+                    <h:outputText value="Discriminação"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.nomeServico}" />
+                    
+                    <h:outputText value="Observação"/>
+                    <h:outputText value="#{usuarioController.selected.ativo}" title="#{bundle.ViewUsuarioTitle_ativo}"/>
+                    
+                    <h:outputText value="Descrição"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.descricao}" title="#{bundle.ViewUsuarioTitle_senha}"/>
+                    
+                    <h:outputText value="Nome do Cliente"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.cliente.nomeCompleto}" title="#{bundle.ViewUsuarioTitle_nome}"/>
+                    
+                    <h:outputText value="Data de Cadastro"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.dataEntrada}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                    
+                    <h:outputText value="Previsão de entrega"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.dataSaida}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                    
+                    <h:outputText value="Valor Pago"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.valor}"/>
+                </h:panelGrid>
+                
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

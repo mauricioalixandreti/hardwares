@@ -33,13 +33,14 @@ import javax.inject.Inject;
 public class ServicoController implements Serializable {
 
     private Servico current;
+    private Servico servicoToImprimir;
     private DataModel items = null;
     @EJB
     private br.com.maxinfo.hardware.facade.ServicoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private Cliente clienteSelected;
-    
+    private Cliente clienteToImprimir;
     
     @EJB
     ClienteFacade clienteFacade;
@@ -91,7 +92,7 @@ public class ServicoController implements Serializable {
     public String prepareCreate() {
         current = new Servico();
         selectedItemIndex = -1;
-        return "/adm/usuario/servico-cadastro.xhtml?faces-redirect=true";
+        return "/adm/usuario/imprimirServico.xhtml?faces-redirect=true";
     }
 
     public String create() {
@@ -102,6 +103,8 @@ public class ServicoController implements Serializable {
             generateCodigo(current);
             current.setEmpresa(JsfUtil.getEmpresaDaSessao());          
             getFacade().create(current);
+            setClienteToImprimir(current.getCliente());
+            setServicoToImprimir(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ServicoCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -363,6 +366,24 @@ public class ServicoController implements Serializable {
         JsfUtil.addSuccessMessage("Serviço removido com Sucesso!");
         return "/adm/usuario/home.xhtml?faces-redirect=true";
     }
+    
+    
+    public Cliente getClienteToImprimir() {
+        return clienteToImprimir;
+    }
+
+    public void setClienteToImprimir(Cliente clienteToImprimir) {
+        this.clienteToImprimir = clienteToImprimir;
+    }
+
+    public Servico getServicoToImprimir() {
+        return servicoToImprimir;
+    }
+
+    public void setServicoToImprimir(Servico servicoToImprimir) {
+        this.servicoToImprimir = servicoToImprimir;
+    }
+    
     
     
     
