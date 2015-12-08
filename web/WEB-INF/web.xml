@@ -30,7 +30,7 @@
     </filter>
     <filter-mapping>
         <filter-name>FiltroAdminstrador</filter-name>
-        <url-pattern>/adm/empresa/*</url-pattern>
+        <url-pattern>/faces/adm/empresa/*</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>FiltroAtendente</filter-name>
@@ -38,7 +38,7 @@
     </filter>
     <filter-mapping>
         <filter-name>FiltroAtendente</filter-name>
-        <url-pattern>/adm/usuario/*</url-pattern>
+        <url-pattern>/faces/adm/usuario/*</url-pattern>
     </filter-mapping>
     
     <filter>

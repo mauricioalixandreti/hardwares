@@ -11,22 +11,17 @@ import br.com.maxinfo.hardware.model.Usuario;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
-import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "servicoController")
 @SessionScoped
@@ -331,10 +326,10 @@ public class ServicoController implements Serializable {
         }
         setFlagEdit(1);
         setCurrent(s);
-        return "/adm/usuario/detalharServico.xhtml?faces-redirect=true";
+        return "/adm/usuario/detalhar-servico.xhtml?faces-redirect=true";
     }
     
-    public String updateServicoSelecionado (){
+    public String updateServicoSelecionado (){  
         Servico aux = getCurrent();
         getFacade().edit(aux);
         setCurrent(null);

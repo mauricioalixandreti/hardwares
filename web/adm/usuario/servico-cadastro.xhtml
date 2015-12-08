@@ -14,13 +14,17 @@
 
             <h:panelGrid columns="2" style="margin: 60px;"> 
 
-                <h:outputLabel value="#{bundle.CreateServicoLabel_nomeServico}" for="nomeServico" />
+                <h:outputLabel value="Produto" for="nomeServico" />
                 <h:inputText id="nomeServico" value="#{servicoController.selected.nomeServico}" title="#{bundle.CreateServicoTitle_nomeServico}" required="true"
                              style="width: 250px;" requiredMessage="#{bundle.CreateServicoRequiredMessage_nomeServico}"/>
 
-                <h:outputLabel value="#{bundle.CreateServicoLabel_descricao}" for="descricao" />
+                <h:outputLabel value="Observação do produto:" for="observacao" />
+                 <p:inputTextarea id="observacao"
+                         value="#{servicoController.selected.observacao}"   style="width: 400px; height: 60px;" maxlength="300" autoResize="true" />
+                
+                <h:outputLabel value="Descrição do problema:" for="descricao" />
                 <p:inputTextarea id="descricao" value="#{servicoController.selected.descricao}" style="width: 400px; height: 100px;" maxlength="300" autoResize="false" />
-
+                
                 <h:outputLabel value="Nome do Cliente:" for="cliente" />
                 <p:selectOneMenu id="cliente" value="#{servicoController.selected.cliente}" 
                                  converter="clienteConverter"  

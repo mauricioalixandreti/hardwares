@@ -1,7 +1,5 @@
 package br.com.maxinfo.hardware.jsf;
 
-import br.com.maxinfo.hardware.facade.ClienteFacade;
-import br.com.maxinfo.hardware.facade.ServicoFacade;
 import br.com.maxinfo.hardware.jsf.util.JsfUtil;
 import br.com.maxinfo.hardware.jsf.util.PaginationHelper;
 import br.com.maxinfo.hardware.facade.UsuarioFacade;
@@ -9,21 +7,14 @@ import br.com.maxinfo.hardware.facade.UsuarioFacade;
 
 import br.com.maxinfo.hardware.model.Empresa;
 import java.io.Serializable;
-import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 
 
 import br.com.maxinfo.hardware.model.Usuario;
 import java.util.List;
-import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
 
 @ManagedBean(name = "usuarioController")
 @SessionScoped
@@ -108,12 +99,12 @@ public class UsuarioController implements Serializable {
                 getFacade().create(current);                
                 prepareCreate();
                 JsfUtil.addSuccessMessage("Usuário cadastrado com sucesso!");
-                return "/adm/empresa/manageatendente.xhtml"; //apenas usuarios ADM podem criar outro usuários                
+                return "/adm/empresa/atendentes.xhtml"; //apenas usuarios ADM podem criar outro usuários                
             }
             
             prepareCreate();
             JsfUtil.addErrorMessage("Erro ao criar usuario, tente novamente!");
-            return "/adm/empresa/manageatendente.xhtml"; //apenas usuarios ADM podem criar outro usuários
+            return "/adm/empresa/atendentes.xhtml"; //apenas usuarios ADM podem criar outro usuários
         } catch (Exception e) {
            
             return null;
@@ -236,7 +227,7 @@ public class UsuarioController implements Serializable {
         getFacade().remove(getCurrent());
         setCurrent(null);
         JsfUtil.addSuccessMessage("Atendete removido com Sucesso!");
-        return "/adm/empresa/deativarAtendente.xhtml";
+        return "/adm/empresa/desativar-tendente.xhtml";
     }
     
     

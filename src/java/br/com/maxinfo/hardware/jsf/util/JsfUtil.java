@@ -71,11 +71,13 @@ public class JsfUtil {
     }
     
     public static void logOut (){
-         HttpServletRequest req = null;
+        HttpServletRequest req = null;
         req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();        
         req.getSession().setAttribute("usuarioController", null);
         req.getSession().setAttribute("empresaController", null);
         req.getSession().setAttribute("servicoController", null);
+        req.getSession().invalidate();
+      
     }
     
      public static Empresa getEmpresaDaSessao (){

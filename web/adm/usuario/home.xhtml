@@ -17,17 +17,16 @@
                              styleClass="bodyDlg"
                              scrollHeight="1" 
                              style="border:solid 1px;">
-
-                    <p:column headerText="Discriminação" footerText="" >                        
+                     <p:column  headerText="Cliente" footerText="" >                          
+                        <h:outputText value="#{item.cliente.nomeCompleto}"/>
+                     </p:column>
+                    
+                    <p:column headerText="Produto" footerText="" >                        
                         <h:outputText value="#{item.nomeServico}"/>
                     </p:column>
-
-                    <p:column headerText="Status" footerText="" >                         
-                        <h:outputText value="#{item.status == 1?'PRONTO':'ANALISANDO'}"/>
-                    </p:column>
-
-                    <p:column headerText="Data de Cadastro:" footerText="" >                        
-                        <h:outputText value="#{item.dataEntrada}">
+                    
+                    <p:column  headerText="Data da Entrega:" footerText="" >                        
+                        <h:outputText value="#{item.dataSaida == null? 'AGUARDANDO':item.dataSaida}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
@@ -35,24 +34,12 @@
                     <p:column headerText="Pago:" footerText="" >                   
                         <p:button  value="Sim" style="color: green; font-weight: bold;" rendered="#{item.pago==1}" />
                         <p:button  value="Não" style="color: red; font-weight: bold;" rendered="#{item.pago !=1}" />
-                        
-                        
-                         
                     </p:column>
 
                     <p:column  headerText="Valor:" footerText="" >                          
                         <h:outputText value="#{item.valor}"/>
                     </p:column>
-                    <p:column  headerText="Data da Entrega:" footerText="" >                        
-                        <h:outputText value="#{item.dataSaida == null? 'AGUARDANDO':item.dataSaida}">
-                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                        </h:outputText>
-                    </p:column>
-
-                    <p:column  headerText="Cliente" footerText="" >                          
-                        <h:outputText value="#{item.cliente.nomeCompleto}"/>
-                    </p:column>
-
+                    
                     <p:column  headerText="Editar" footerText="" >                          
                         <p:commandButton  icon="ui-icon ui-icon-folder-collapsed" 
                                          action="#{servicoController.prepareToEdit(item)}"               
@@ -99,9 +86,7 @@
                         <p:commandButton value="Fechar" style="background:green; color: white" update="servicosAbertos" oncomplete="confirmDetalhar.hide()"/>                        
                     </div>
                 </p:dialog>
-
             </h:form>
-
         </div>
     </ui:define>
 

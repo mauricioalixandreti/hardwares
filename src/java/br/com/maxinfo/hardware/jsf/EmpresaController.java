@@ -4,11 +4,8 @@ import br.com.maxinfo.hardware.model.Empresa;
 import br.com.maxinfo.hardware.jsf.util.JsfUtil;
 import br.com.maxinfo.hardware.jsf.util.PaginationHelper;
 import br.com.maxinfo.hardware.facade.EmpresaFacade;
-import br.com.maxinfo.hardware.model.Usuario;
-import java.util.List;
 
 import java.io.Serializable;
-import java.util.Map;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -18,9 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
-import javax.faces.model.SelectItem;
-import org.primefaces.context.RequestContext;
+
 
 @ManagedBean(name = "empresaController")
 @SessionScoped

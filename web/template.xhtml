@@ -65,7 +65,7 @@
                         <p:panelMenu id="panelMenu">                                                   
                             
                             <p:submenu id="m1" label="Administração" rendered="#{usuarioController.usuarioLogado.tipoUsuario == 'ADM'}"  > 
-                                <p:menuitem value="Administrar Atendentes" url="/adm/empresa/manageatendente.xhtml" 
+                                <p:menuitem value="Administrar Atendentes" url="/adm/empresa/atendentes.xhtml" 
                                             ajax="false" icon="ui-icon-disk" />                                
                                 <p:menuitem value="Desativar Atendente" icon="ui-icon-close" url="/adm/empresa//deativarAtendente.xhtml" />  
                             </p:submenu>                                
@@ -76,7 +76,7 @@
                             </p:submenu>                                
                             <p:submenu id="m3" label="Servico"> 
                                 <p:menuitem value="Cadastro" icon="ui-icon-disk" url="/adm/usuario/servico-cadastro.xhtml" />  
-                                <p:menuitem value="Finalizados" url="/adm/usuario/servicosFinalizados.xhtml"  icon="ui-icon-check" />  
+                                <p:menuitem value="Finalizados" url="/adm/usuario/servicos-finalizados.xhtml"  icon="ui-icon-check" />  
                                 <p:menuitem value="Cancelados"   icon="ui-icon-document" />  
                             </p:submenu>                               
 
