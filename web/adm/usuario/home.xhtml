@@ -7,53 +7,63 @@
                 template="./../../template.xhtml"
                 xmlns:p="http://primefaces.org/ui">
 
-
-
-
     <ui:define name="content">
         <div align="center">
-            <h:form id="formServicosPendente">
+            <h:form id="formServicosPendente">                
                 <p:dataTable id="servicosAbertos" value="#{servicoController.allServicosPendentes}" var="item"   
-                             styleClass="bodyDlg"
-                             scrollHeight="1" 
-                             style="border:solid 1px;">
-                     <p:column  headerText="Cliente" footerText="" >                          
+                             styleClass="bodyDlg" widgetVar="servicosPend"                             
+                             scrollHeight="300"
+                             scrollable="true"
+                             style="border:solid 1px;"                             
+                    selectionMode="single" rowKey="#{item.codigo}"
+                    paginator="true" rows="10"
+                    paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+                    
+                    
+                    <p:column filterBy="#{item.cliente.nomeCompleto}"
+                               filterMatchMode="contains" headerText="Cliente" footerText="" >                          
                         <h:outputText value="#{item.cliente.nomeCompleto}"/>
                      </p:column>
                     
-                    <p:column headerText="Produto" footerText="" >                        
+                    <p:column filterBy="#{item.nomeServico}"
+                               filterMatchMode="contains" headerText="Produto" footerText="" >                        
                         <h:outputText value="#{item.nomeServico}"/>
                     </p:column>
                     
-                    <p:column  headerText="Data da Entrega:" footerText="" >                        
+                    <p:column width="90" headerText="Data da Entrega:" footerText="" >                        
                         <h:outputText value="#{item.dataSaida == null? 'AGUARDANDO':item.dataSaida}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
 
-                    <p:column headerText="Pago:" footerText="" >                   
-                        <p:button  value="Sim" style="color: green; font-weight: bold;" rendered="#{item.pago==1}" />
-                        <p:button  value="Não" style="color: red; font-weight: bold;" rendered="#{item.pago !=1}" />
+                    <p:column width="50" headerText="Pago:" footerText="" >                   
+                        <p:button  value="Sim" style="color: green; font-weight: bold;"
+                                   rendered="#{item.pago==1}" />
+                        <p:button  value="Não" style="color: red; font-weight: bold;" 
+                                   rendered="#{item.pago !=1}" />
                     </p:column>
 
-                    <p:column  headerText="Valor:" footerText="" >                          
+                    <p:column width="60"  headerText="Valor:" footerText="" >                          
                         <h:outputText value="#{item.valor}"/>
                     </p:column>
                     
-                    <p:column  headerText="Editar" footerText="" >                          
-                        <p:commandButton  icon="ui-icon ui-icon-folder-collapsed" 
+                    <p:column width="50"  headerText="Editar" footerText="" >                          
+                        <p:commandButton  icon="ui-icon-pencil" 
                                          action="#{servicoController.prepareToEdit(item)}"               
                                          style="background:lightgray">
-                            
-                             
                         </p:commandButton>
                     </p:column>
 
-                    <p:column  headerText="Cancelar" footerText="" >                          
-                        <p:commandButton   icon="ui-icon-trash"
-                                         action="#{servicoController.prepareToRemove(item)}"                                                                                
-                                         oncomplete="cd.show()" style="background: #ff9999" />
+                    <p:column width="50" headerText="Imprimir" footerText="" >                          
+                        <p:commandButton   icon="ui-icon-print" 
+                                         action="#{servicoController.prepareToImprimir(item)}"                                                                                               
+                                         style="background: deepskyblue" />
                     </p:column>
+                    
+                    <p:ajax event="rowSelect" listener="#{servicoController.onRowSelect}"
+                            oncomplete="PF('confirmDetalhar').show()" update=":formServicosPendente" />
+                    <p:ajax event="rowUnselect"  />
+                    
 
                 </p:dataTable>
 
@@ -74,16 +84,39 @@
                 </p:confirmDialog>
 
 
-                 <p:dialog  id="confirmDetalhar"
-                                  rendered="#{servicoController.flagEdit==1}"
-                                 style="width: 400px" 
-                                 header="Detalhes do Serviço" 
+                <p:dialog  id="confirmDetalhar"     modal="true"                             
+                                 style="width: 400px;"
+                                 resizable="false"
+                                 header="Detalhes do Produto" 
                                  widgetVar="confirmDetalhar">
-                     <p:column headerText="Discriminação do Serviço">
-                         <h:outputText value="#{usuarioController.current.nome}" />
-                     </p:column>
+                     
+                    <h:panelGrid columns="2" style="width: 400px;"  >
+                       <h:outputText value="Produto:"/>
+                    <h:outputText value="#{servicoController.current.nomeServico}" />
+                    
+                    <h:outputText value="Observação"/>
+                    <h:outputText  />
+                    
+                    <h:outputText value="Problema reclamado"/>
+                    <h:outputText value="#{servicoController.current.descricao}" />
+                    
+                    
+                    <h:outputText value="Data de Cadastro"/>
+                    <h:outputText value="#{servicoController.current.dataEntrada}">
+                         <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    
+                    <h:outputText value="Previsão de entrega"/>
+                    <h:outputText value="#{servicoController.current.dataSaida}">
+                         <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>               
+                    </h:panelGrid> 
+                   <p:ajax event="close" update="servicosAbertos" 
+                           listener="#{servicoController.resetarCamposTemprarios}" />                            
+                  
                     <div align="right">                        
-                        <p:commandButton value="Fechar" style="background:green; color: white" update="servicosAbertos" oncomplete="confirmDetalhar.hide()"/>                        
+                        <p:commandButton value="Fechar"  
+                                     update="servicosAbertos" oncomplete="confirmDetalhar.hide()"/>                        
                     </div>
                 </p:dialog>
             </h:form>

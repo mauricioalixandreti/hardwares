@@ -34,9 +34,10 @@ public class ServicoFacade extends AbstractFacade<Servico> {
         return resultList;
    }
     
-    public List<Servico> listarServicosByStatus (int status){        
+    public List<Servico> listarServicosByStatus (int status, String emailEmpresa){        
         Query createQuery = getEntityManager().createNamedQuery("Servico.findByStatus");
         createQuery.setParameter("status",status);
+        createQuery.setParameter("emailEmpresa",emailEmpresa);        
         List<Servico> resultList = createQuery.getResultList();
         return resultList;
    }

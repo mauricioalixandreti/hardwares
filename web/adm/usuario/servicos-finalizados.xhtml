@@ -7,9 +7,6 @@
                 template="./../../template.xhtml"
                 xmlns:p="http://primefaces.org/ui">
 
-
-
-
     <ui:define name="content">
         <div align="center">
             <h:form>
@@ -50,11 +47,13 @@
                     </p:column>
 
                     <p:column  headerText="Detalhes" footerText="" >                          
-                        <p:commandButton type="button"  icon="ui-icon ui-icon-folder-collapsed" onclick="confirmDetalhar.show()" style="background: #00ffcc"  />
+                        <p:commandButton type="button"  icon="ui-icon ui-icon-folder-collapsed"
+                                         onclick="confirmDetalhar.show()" style="background: #00ffcc"  />
                     </p:column>
 
                     <p:column  headerText="Cancelar" footerText="" >                          
-                        <p:commandButton type="button" icon="ui-icon-trash" onclick="cd.show()" style="background: #ff9999" />
+                        <p:commandButton type="button" icon="ui-icon-trash" onclick="cd.show()"
+                                         style="background: #ff9999" />
                     </p:column>
 
                 </p:dataTable>
@@ -67,8 +66,10 @@
                                  header="Exlusão de Serviço" severity="alert"
                                  widgetVar="cd" visible="false" >
                     <div align="right">
-                        <p:commandButton value="Não" style="background:tomato; color: white"  onclick="cd.hide();" type="button" />
-                        <p:commandButton value="Sim" style="background:green; color: white" update="servicosAbertos" oncomplete="cd.hide()"/>                        
+                        <p:commandButton value="Não" style="background:tomato; color: white"
+                                         onclick="cd.hide();" type="button" />
+                        <p:commandButton value="Sim" style="background:green; color: white"
+                                         update="servicosAbertos" oncomplete="cd.hide()"/>                        
                     </div>
                 </p:confirmDialog>
 
@@ -78,7 +79,8 @@
                                  header="Detalhes do Serviço" severity="alert"
                                  widgetVar="confirmDetalhar" visible="false" >
                     <div align="right">                        
-                        <p:commandButton value="Fechar" style="background:green; color: white" update="servicosAbertos" oncomplete="confirmDetalhar.hide()"/>                        
+                        <p:commandButton value="Fechar" style="background:green; color: white"
+                                         update="servicosAbertos" oncomplete="confirmDetalhar.hide()"/>                        
                     </div>
                 </p:confirmDialog>
 

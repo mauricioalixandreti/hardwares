@@ -31,7 +31,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Servico.findByEmpresa", query = "SELECT s FROM Servico s WHERE s.empresa.email = :empresa"),
     @NamedQuery(name = "Servico.findAll", query = "SELECT s FROM Servico s"),
     @NamedQuery(name = "Servico.findByCodigo", query = "SELECT s FROM Servico s WHERE s.codigo = :codigo"),
-    @NamedQuery(name = "Servico.findByStatus", query = "SELECT s FROM Servico s WHERE s.status = :status"),
+    @NamedQuery(name = "Servico.findByStatus", query = "SELECT s FROM Servico s WHERE s.status = :status"
+            + " and s.empresa.email = :emailEmpresa order by s.dataEntrada DESC"),
     @NamedQuery(name = "Servico.findByDescricao", query = "SELECT s FROM Servico s WHERE s.descricao = :descricao"),
     @NamedQuery(name = "Servico.findByDataEntrada", query = "SELECT s FROM Servico s WHERE s.dataEntrada = :dataEntrada"),
     @NamedQuery(name = "Servico.findByNomeServico", query = "SELECT s FROM Servico s WHERE s.nomeServico = :nomeServico"),
@@ -50,6 +51,11 @@ public class Servico implements Serializable {
     @NotNull
     @Column(name = "status")
     private int status;
+    
+//    @Size(max = 300)
+//    @Column(name = "observacao")
+//    private String observacao;    
+//    
     @Size(max = 300)
     @Column(name = "descricao")
     private String descricao;
@@ -75,7 +81,7 @@ public class Servico implements Serializable {
     private Date dataSaida;
     @JoinColumn(name = "empresa", referencedColumnName = "email")
     @ManyToOne(optional = false)
-    private Empresa empresa;
+    private Empresa empresa;    
     @JoinColumn(name = "cliente", referencedColumnName = "emailcpf")
     @ManyToOne(optional = false)
     private Cliente cliente;
@@ -209,6 +215,14 @@ public class Servico implements Serializable {
     public void converterPago (String pago){
         setPago( "Y".equals(pago.trim())?1:0 );
     }
+
+//    public String getObservacao() {
+//        return observacao;
+//    }
+//
+//    public void setObservacao(String observacao) {
+//        this.observacao = observacao;
+//    }
     
     
     

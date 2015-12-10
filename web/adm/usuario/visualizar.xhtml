@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">  
+
+
+   
+        <h:form id="pnLogin">            
+            
+            <p:dialog  id="confirmDetalhar"     modal="true"                             
+                                 style="width: 400px;"
+                                 resizable="false"
+                                 header="Detalhes do Produto" 
+                                 widgetVar="confirmDetalhar">
+                     
+                    <h:panelGrid columns="2" style="width: 400px;"  >
+                       <h:outputText value="Produto:"/>
+                    <h:outputText value="#{servicoController.current.nomeServico}" />
+                    
+                    <h:outputText value="Observação"/>
+                    <h:outputText  />
+                    
+                    <h:outputText value="Problema reclamado"/>
+                    <h:outputText value="#{servicoController.current.descricao}" />
+                    
+                    
+                    <h:outputText value="Data de Cadastro"/>
+                    <h:outputText value="#{servicoController.current.dataEntrada}">
+                         <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    
+                    <h:outputText value="Previsão de entrega"/>
+                    <h:outputText value="#{servicoController.current.dataSaida}">
+                         <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>               
+                    </h:panelGrid> 
+                   <p:ajax event="close" update="servicosAbertos" 
+                           listener="#{servicoController.resetarCamposTemprarios}" />                            
+                  
+                    <div align="right">                        
+                        <p:commandButton value="Fechar"  
+                                     update="servicosAbertos" oncomplete="confirmDetalhar.hide()"/>                        
+                    </div>
+                </p:dialog>
+
+        </h:form>
+
+
+
+
+</html>
+

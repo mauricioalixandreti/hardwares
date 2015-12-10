@@ -67,17 +67,16 @@
                             <p:submenu id="m1" label="Administração" rendered="#{usuarioController.usuarioLogado.tipoUsuario == 'ADM'}"  > 
                                 <p:menuitem value="Administrar Atendentes" url="/adm/empresa/atendentes.xhtml" 
                                             ajax="false" icon="ui-icon-disk" />                                
-                                <p:menuitem value="Desativar Atendente" icon="ui-icon-close" url="/adm/empresa//deativarAtendente.xhtml" />  
+                                <p:menuitem value="Desativar Atendente" icon="ui-icon-close" url="/adm/empresa//desativar-atendente.xhtml" />  
                             </p:submenu>                                
                             <p:submenu id="m2" label="Cliente">  
-                                <p:menuitem value="Cadastro" icon="ui-icon-person" />  
-                                <p:menuitem value="Verificar Pagamento"   icon="ui-icon-check" />  
+                                <p:menuitem value="Meus Clientes" icon="ui-icon-person" />  
+                                <p:menuitem value="Cadastro" icon="ui-icon-disk" />  
                                  
                             </p:submenu>                                
                             <p:submenu id="m3" label="Servico"> 
                                 <p:menuitem value="Cadastro" icon="ui-icon-disk" url="/adm/usuario/servico-cadastro.xhtml" />  
-                                <p:menuitem value="Finalizados" url="/adm/usuario/servicos-finalizados.xhtml"  icon="ui-icon-check" />  
-                                <p:menuitem value="Cancelados"   icon="ui-icon-document" />  
+                                <p:menuitem value="Finalizados" url="/adm/usuario/servicos-finalizados.xhtml"  icon="ui-icon-check" />                                  
                             </p:submenu>                               
 
                             <p:submenu id="m4" label="Relatórios">                                

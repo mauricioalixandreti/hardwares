@@ -12,18 +12,20 @@
             <p:growl autoUpdate="false"/>
             <h2>Cadastrar novo serviço</h2>
 
-            <h:panelGrid columns="2" style="margin: 60px;"> 
+            <h:panelGrid columns="2" style="margin: 30px;"> 
 
                 <h:outputLabel value="Produto" for="nomeServico" />
-                <h:inputText id="nomeServico" value="#{servicoController.selected.nomeServico}" title="#{bundle.CreateServicoTitle_nomeServico}" required="true"
+                <h:inputText id="nomeServico" value="#{servicoController.selected.nomeServico}" 
+                             title="#{bundle.CreateServicoTitle_nomeServico}" required="true"
                              style="width: 250px;" requiredMessage="#{bundle.CreateServicoRequiredMessage_nomeServico}"/>
 
-                <h:outputLabel value="Observação do produto:" for="observacao" />
-                 <p:inputTextarea id="observacao"
-                         value="#{servicoController.selected.observacao}"   style="width: 400px; height: 60px;" maxlength="300" autoResize="true" />
+                <h:outputLabel value="Observação" for="observacao" />
+                <p:inputTextarea id="observacao"  style="width: 400px; height:50px;"
+                                 maxlength="300" autoResize="true" />
                 
-                <h:outputLabel value="Descrição do problema:" for="descricao" />
-                <p:inputTextarea id="descricao" value="#{servicoController.selected.descricao}" style="width: 400px; height: 100px;" maxlength="300" autoResize="false" />
+                <h:outputLabel value="Problema reclamado:" for="descricao" />
+                <p:inputTextarea id="descricao" value="#{servicoController.selected.descricao}"
+                                 style="width: 400px; height: 100px;" maxlength="300" autoResize="true" />
                 
                 <h:outputLabel value="Nome do Cliente:" for="cliente" />
                 <p:selectOneMenu id="cliente" value="#{servicoController.selected.cliente}" 
@@ -32,21 +34,15 @@
                     <f:selectItem itemLabel="Selecione..." itemValue=""/>
                     <f:selectItems value="#{servicoController.allClientesDaEmpresaLogada}" 
                                    var="cliente"
-                                   itemLabel="#{cliente.nomeCompleto} :::: #{cliente.emailcpf} " itemValue="#{cliente.emailcpf}"/>
-                </p:selectOneMenu>
-
-
-                <h:outputLabel value="Data de Cadastro:" for="dataEntrada" />               
-                <p:inputMask id="dataEntrada" value="#{servicoController.selected.dataEntrada}"
-                             onclick="data.show()" onmouseover="data.show()"
-                             mask="99/99/9999">
-                    <f:convertDateTime pattern="dd/MM/yyyy" />                    
-                </p:inputMask> 
+                                   itemLabel="#{cliente.nomeCompleto} :::: #{cliente.emailcpf} "
+                                   itemValue="#{cliente.emailcpf}"/>
+                </p:selectOneMenu>                 
                         
                 <h:outputLabel value="Data de Entrega::" for="dataSaida" />
-                <p:inputMask id="dataSaida" value="#{servicoController.selected.dataSaida}" mask="99/99/9999">
-                    <f:convertDateTime pattern="dd/MM/yyyy" />                    
-                </p:inputMask> 
+                <p:calendar mindate="#{servicoController.toDay}"
+                   pattern="dd/MM/yyyy" value="#{servicoController.selected.dataSaida}"     />
+                
+                
                 
 
                 <h:outputLabel value="#{bundle.CreateServicoLabel_pago}" for="pago" />
@@ -67,9 +63,10 @@
                 <f:facet name="footer">                     
                     <div align="right">                            
                         <p:commandButton id="btnCadServico" 
-                                         style="background: green;color: white"
+                                         style="background: gold;"
                                          action="#{servicoController.create()}"
                                          ajax="false"
+                                         update="formCad"
                                          value="Cadastrar" icon="ui-icon-check"  />
                     </div>                                    
                 </f:facet>

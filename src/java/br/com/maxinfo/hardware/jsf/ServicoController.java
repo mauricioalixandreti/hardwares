@@ -21,7 +21,10 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.UUID;
 import javax.faces.bean.SessionScoped;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 @ManagedBean(name = "servicoController")
 @SessionScoped
@@ -36,6 +39,9 @@ public class ServicoController implements Serializable {
     private int selectedItemIndex;
     private Cliente clienteSelected;
     private Cliente clienteToImprimir;
+    private Date toDay = new Date ();
+    
+   private List<Servico> filteredServices;
     
     @EJB
     ClienteFacade clienteFacade;
@@ -87,7 +93,7 @@ public class ServicoController implements Serializable {
     public String prepareCreate() {
         current = new Servico();
         selectedItemIndex = -1;
-        return "/adm/usuario/imprimirServico.xhtml?faces-redirect=true";
+        return "/adm/usuario/servico-cadastro.xhtml?faces-redirect=true";
     }
 
     public String create() {
@@ -95,12 +101,13 @@ public class ServicoController implements Serializable {
             // converter valor e pagamento e gerar codigo antes do create ();
             current.converterPago(getPagoAsString());
             current.converterValor(getValorAsSring());
+            current.setDataEntrada(new Date());
             generateCodigo(current);
             current.setEmpresa(JsfUtil.getEmpresaDaSessao());          
             getFacade().create(current);
             setClienteToImprimir(current.getCliente());
             setServicoToImprimir(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ServicoCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ServicoCreated"));            
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -251,13 +258,11 @@ public class ServicoController implements Serializable {
     }
     
     
-    public List<Servico> getAllServicosFinalizados (){        
-        // Flata filtrar por empresa logada e estatus 
-        return getFacade().listarServicosByStatus(1);
+    public List<Servico> getAllServicosFinalizados (){                
+        return getFacade().listarServicosByStatus(1,getUsuarioLogado().getEmpresa().getEmail());
     }
-    public List<Servico> getAllServicosPendentes (){
-        //Fala filtrar por empresa logada e status 
-        return getFacade().listarServicosByStatus(0);
+    public List<Servico> getAllServicosPendentes (){        
+        return getFacade().listarServicosByStatus(0,getUsuarioLogado().getEmpresa().getEmail());
     }
     
     public List<Cliente> getAllClientesDaEmpresaLogada (){       
@@ -305,8 +310,8 @@ public class ServicoController implements Serializable {
         GregorianCalendar gr = (GregorianCalendar) GregorianCalendar.getInstance();
         gr.setGregorianChange(new Date ());
         Usuario aux = getUsuarioLogado();
-        String cpf = aux.getCpf();        
-        String codigo = cpf.substring(0,3)+gr.getTimeInMillis()+cpf.substring(7);
+        String cpf = aux.getCpf();                
+        String codigo = String.valueOf(gr.getTimeInMillis());
         geraracodigo.setCodigo(codigo.trim());
     }
     private int flagEdit = 0; 
@@ -328,6 +333,15 @@ public class ServicoController implements Serializable {
         setCurrent(s);
         return "/adm/usuario/detalhar-servico.xhtml?faces-redirect=true";
     }
+    public String prepareToImprimir (Servico s){
+        if(s==null){
+            setCurrent(s);            
+            return "/adm/usuario/home.xhtml?faces-redirect=true";
+        }
+        
+        setServicoToImprimir(s);
+        return "/adm/usuario/recibo.xhtml?faces-redirect=true";
+    }
     
     public String updateServicoSelecionado (){  
         Servico aux = getCurrent();
@@ -347,6 +361,12 @@ public class ServicoController implements Serializable {
         this.current = current;
     }
     
+     public void onRowSelect(SelectEvent event) {        
+        setCurrent((Servico)event.getObject());        
+    }
+    public void onRowUnselect(UnselectEvent event) {
+        
+    }
    
     
      public void prepareToRemove (Servico remove ){
@@ -379,7 +399,25 @@ public class ServicoController implements Serializable {
         this.servicoToImprimir = servicoToImprimir;
     }
     
-    
+    public void resetarCamposTemprarios(){
+        setCurrent(null);
+    }
+
+    public List<Servico> getFilteredServices() {
+        return filteredServices;
+    }
+
+    public void setFilteredServices(List<Servico> filteredServices) {
+        this.filteredServices = filteredServices;
+    }
+
+    public Date getToDay() {
+        return toDay;
+    }
+
+    public void setToDay(Date toDay) {
+        this.toDay = toDay;
+    }
     
     
     

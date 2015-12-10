@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Hardwares</title>        
+        <link rel="shortcut icon" href="/resources/images/logo.png" />
+    </h:head>
+    <h:body>
+        <h:form id="pnLogin">
+            
+            <p:panel style="width: 600px;">
+                
+               <div align="left">
+                   <h1>Mikrotic Informática</h1>
+                   <h:outputText value="Rua João Pessoa - CENTRO"/><br/>
+                   <h:outputText value="58735-000 - Teixeira-PB"/><br/>
+                   <h:outputText value="Contato:(83)9"/><br/>                    
+                </div> 
+                <p:separator /> 
+               <div align="center">
+                    <h2>RECIBO DE ENTREGA</h2>                    
+                    <h:outputText value="OS-Nº. #{servicoController.servicoToImprimir.codigo}"/>
+               </div> 
+                <p:separator />
+                <h:panelGrid columns="2">
+                    <h:outputText value="Nome do Cliente:"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.cliente.nomeCompleto}"/>
+                    <h:outputText value="CPF/CNPJ:"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.cliente.emailcpf}"/>
+                    <h:outputText value="Contato:"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.cliente.celular}"/>
+                    <h:outputText value="Endereço:"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.cliente.rua}"/>
+                    <h:outputText value="Bairro:"/>
+                    <h:outputText value="#COLOCAR O ATRIBUTO NA CLASSE"/>
+                    <h:outputText value="Cidade:"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.cliente.cidade}"/>
+                </h:panelGrid>
+                
+             <p:separator />   
+             <h:panelGrid columns="2">
+                    
+                   
+                    <h:outputText value="Produto:"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.nomeServico}" />
+                    
+                    <h:outputText value="Observação:"/>
+                    <h:outputText value="#{usuarioController.selected.ativo}" />
+                    
+                    <h:outputText value="Problema reclamado:"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.descricao}"/>
+                    
+                    
+                    <h:outputText value="Data de Cadastro"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.dataEntrada}">
+                         <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    
+                    <h:outputText value="Previsão de entrega"/>
+                    <h:outputText value="#{servicoController.servicoToImprimir.dataSaida}">
+                         <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>                                       
+                    
+                </h:panelGrid> 
+                <p:separator />
+                
+                <br/>
+                <br/>                
+                <div align="center">
+                    <h:outputText value="_______________________________________"/><br/>
+                    <h:outputText value="Atendente #{usuarioController.usuarioLogado.nome}"/>
+                </div>
+                
+                </p:panel>
+        </h:form>
+
+</h:body>
+
+
+</html>
+

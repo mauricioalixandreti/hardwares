@@ -14,19 +14,24 @@
                 <div align="center" >
                     <p:growl id="grremove"/>
                     
-                    <p:dialog header="Editar Serviço" visible="true" resizable="false" closable="false"
+                    <p:dialog rendered="#{servicoController.current != null}" header="Editar Serviço" visible="true" resizable="false" closable="false"
                               modal="true"
                                styleClass="bodyDlg">
                     <h:panelGrid columns="2">
                        
-                        <h:outputLabel value="Disciminacão:" for="cliente" />
+                        <h:outputLabel value="Produto:" for="cliente" />
                         <h:outputText value="#{servicoController.current.nomeServico}"/>
+                       
+                        <h:outputLabel value="Observação" for="observacao" />
+                        <p:inputTextarea id="observacao"  style="width: 400px; height:50px;"
+                                         maxlength="300" autoResize="true" />
 
-                        <h:outputLabel value="Descricao" for="cliente" />                      
-                        <h:inputTextarea style="width: 300px; height: 150px" value="#{servicoController.current.descricao}"/>
+                        <h:outputLabel value="Problema reclamado" for="desc" />                      
+                        <h:inputTextarea id="desc" style="width: 400px; height: 100px;"                                         
+                                         value="#{servicoController.current.descricao}"/>
 
 
-                        <h:outputLabel value="Nome do Cliente:" for="cliente" />
+                        <h:outputLabel value="Cliente:" for="cliente" />
                         <p:selectOneMenu id="cliente" value="#{servicoController.current.cliente}" 
                                          converter="clienteConverter"  
                                          required="true" requiredMessage="O nome do cliente é obrigatório!">
